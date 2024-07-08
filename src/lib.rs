@@ -1,5 +1,6 @@
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
+pub fn wc(file: &str) -> usize {
+    let content = std::fs::read_to_string(file).unwrap();
+    return content.len()
 }
 
 #[cfg(test)]
@@ -8,7 +9,20 @@ mod tests {
 
     #[test]
     fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
+        let result = wc("files/empty.txt");
+        assert_eq!(result, 0);
+
+        let result = wc("files/hello.txt");
+        assert_eq!(result, 11);
+
+        let result = wc("files/hello_with_newline.txt");
+        assert_eq!(result, 12);
+
+        let result = wc("files/spaces.txt");
+        assert_eq!(result, 47);
+
+        let result = wc("files/unicode.txt");
+        assert_eq!(result, 12);
+
     }
 }
